@@ -1,0 +1,14 @@
+.search {
+    margin: 0 auto;
+    max-width: 500px;
+    text-align: center;
+    &__box {
+        border-width: 0;
+        height: 45px;
+        padding-left: 2%;
+        width: 98%;
+    }
+    &__empty {
+        margin-top: 20px;
+    }
+}

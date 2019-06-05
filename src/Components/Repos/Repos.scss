@@ -1,0 +1,32 @@
+$purple: #6c32b7;
+
+ul {
+    background: #232222;
+    font-size: 25px;
+    margin-bottom: 50px;
+    li {
+        text-align: left;
+        padding: 10px;
+        a {
+            color: $purple;
+            text-decoration: none;
+        }
+    }
+     li:hover {
+         color: #008B8B;
+     }
+
+     li::after {
+         content: '';
+         display: block;
+         width: 0;
+         height: 2px;
+         background: $purple;
+         transition: width .5s;
+         margin-top: 5px;
+     }
+
+     li:hover::after {
+         width: 85%;
+     }
+}

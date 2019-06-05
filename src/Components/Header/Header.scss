@@ -1,0 +1,34 @@
+ .text {
+    font-family: 'monospace';
+    font-size: 15px;
+    margin: 0 auto;
+    padding: 30px;
+    text-align: center;
+    width: 400px;
+    &-modify {
+        font-family: monospace;
+        display: inline-block;
+        font-size: 30px;
+        font-weight: 200;
+        padding-bottom: 10px;
+    }
+
+    &__image {
+        border-radius: 30px;
+        height: 60px;
+        margin-right: 10px;
+        text-transform: uppercase;
+        transition: all .5s ease;
+        vertical-align: middle;
+        width: 60px;
+        &:hover {
+            cursor: pointer;
+            transform: scale(1.1);
+        }
+    }
+
+    &-name {
+        font-family: monospace;
+        text-transform: uppercase;
+    }
+ }
