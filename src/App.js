@@ -89,6 +89,8 @@ export default class App extends Component {
 						<Route path="/commits/:repo" component={Commits} />
 						<Route path="/" exact render={() => <Repos userResult={item} />} />
 					</Switch>
+
+					<small className="text-foot">Built with ❤ and React and deployed with Netlify, by @PedroHenricks  - © 2019"</small>
 				</div>
 				
 			</Router>
