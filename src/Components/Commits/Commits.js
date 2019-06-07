@@ -14,9 +14,16 @@ class Commits extends Component {
 
     componentDidMount() {
         let BASE_URL = `https://api.github.com/repos/pedrohenrickcs`;
+        /**
+         * API get repos on GitHub
+         */
 
         axios.get(`${BASE_URL}/${this.props.match.params.repo}/commits`)
             .then(commit => {
+                /**
+                 * change state list of repositories
+                 * and take the commits information in api
+                 */                 
                 this.setState({
                     loading: false,
                     data: commit.data.slice(0, 20)
@@ -26,7 +33,9 @@ class Commits extends Component {
     }
 
     render() {
-        
+        /**
+         * Return list of commits
+         */
         return (
             <>
                 {this.state.loading ? <h2 className="search__empty">Carregando... <span aria-label="carregando" role="img">⏳</span></h2> : (

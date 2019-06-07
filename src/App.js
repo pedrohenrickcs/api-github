@@ -20,12 +20,18 @@ export default class App extends Component {
 		this.handleChange = this.handleChange.bind(this);
 	}
 
+	/**
+	 * Set state value input search
+	 */
 	handleChange() {
 		this.setState({
 			searchString: this.refs.search.value
 		});
 	}
 
+	/**
+	 * API get user on GitHub
+	 */
 	getUser() {
 		let BASE_URL = `https://api.github.com/users/pedrohenrickcs`;
 
@@ -52,8 +58,11 @@ export default class App extends Component {
 
 		const avatar = state.avatar
 		const nameProfile = state.nameProfile	
-		
 
+		/**
+		 * Validates the searched terms 
+		 * and displays the filtered result
+		 */
 		if (search.length > 0) {
             item = item.filter(function (user) {
                 return user.name.toLowerCase().match(search);
