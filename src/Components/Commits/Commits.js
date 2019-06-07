@@ -22,7 +22,7 @@ class Commits extends Component {
                     data: commit.data.slice(0, 20)
                 });
             })
-            .catch(err => console('naxeinaum '))
+            .catch(err => console.log('error'))
     }
 
     render() {
