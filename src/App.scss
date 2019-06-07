@@ -12,3 +12,21 @@ body {
 li {
     list-style: none;
 }
+
+.container {
+    margin: 0 auto;
+    max-width: 768px;
+    text-align: center;
+}
+
+.search {
+    &__box {
+        border-width: 0;
+        height: 45px;
+        padding-left: 2%;
+        width: 98%;
+    }
+    &__empty {
+        margin-top: 20px;
+    }
+}

@@ -2,13 +2,11 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
 import './App.scss';
-
-import Search from './Components/Search/Search'
-import Repos from './Components/Repos/Repos'
 import Header from './Components/Header/Header'
-import Commits from './Components/Commits'
+import Repos from './Components/Repos/Repos'
+import Commits from './Components/Commits/Commits'
 
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 export default class App extends Component {
 	constructor(props) {
@@ -16,8 +14,16 @@ export default class App extends Component {
 		this.state = {
 			items: [],
 			nameProfile: '',
-			avatar: ''
+			avatar: '',
+			searchString: ''
 		}
+		this.handleChange = this.handleChange.bind(this);
+	}
+
+	handleChange() {
+		this.setState({
+			searchString: this.refs.search.value
+		});
 	}
 
 	getUser() {
@@ -28,29 +34,10 @@ export default class App extends Component {
 
 			const wayApi = e.data[0].owner;
 
-			this.setState({ nameProfile: wayApi.login, avatar: wayApi.avatar_url })
-
-			const result = e.data.map((i) => {
-				return this.state.items = i;
-			})
-
-			this.setState({ items: result });
+			this.setState({ nameProfile: wayApi.login, avatar: wayApi.avatar_url, items: e.data })
 
 		})
 		.catch(err => console.error(err))
-	}
-
-	getCommit() {
-		let BASE_URL = `https://api.github.com/repos/pedrohenrickcs`;
-
-		const names = this.state.items.map((result) => {
-			return result.name;
-		})
-
-		axios.get(`${BASE_URL}/contacts/commits`)
-		.then(commit => {
-			// console.log('COMMITS', commit);
-		})
 	}
 
 	componentDidMount() {
@@ -59,19 +46,19 @@ export default class App extends Component {
 
 	render() {
 
-		
 		let state = this.state
-		
-		const item = state.items
+		let item = state.items
+		let search = this.state.searchString.trim().toLowerCase();
+
 		const avatar = state.avatar
-		const nameProfile = state.nameProfile
-
-		const isVisible = this.props.isVisible
-
-		this.getCommit()
-
-		console.log('isVisible', this);
+		const nameProfile = state.nameProfile	
 		
+
+		if (search.length > 0) {
+            item = item.filter(function (user) {
+                return user.name.toLowerCase().match(search);
+            });
+        }
 
 		return (
 			<Router>
@@ -80,17 +67,29 @@ export default class App extends Component {
 					nameProfile={nameProfile}
 					item={item}
 				/>
-				{
-					isVisible ? (
-						// <Route path="/commits" exact component={Commits} />
-						<h1>sdfsdfdgf</h1>
-						) : (
-						<Search
-							isVisible={this.props.isVisible}
-							item={item}
-						></Search>
-					)
-				}
+				<div className="container">
+					<form>
+						<input 
+							id="venueType" 
+							className="search__box"
+							type="text"
+							placeholder="Pesquisar"
+							ref="search"
+							value={this.searchString}
+							onChange={this.handleChange}
+							autoComplete="off"
+						/>
+					</form>
+
+					{item.length === 0 ? (
+							<h2 className="search__empty">Nenhum repositório encontrado <span aria-label="triste" role="img">🙁</span></h2>
+						) : null
+					}
+					<Switch>
+						<Route path="/commits/:repo" component={Commits} />
+						<Route path="/" exact render={() => <Repos userResult={item} />} />
+					</Switch>
+				</div>
 				
 			</Router>
 		)
