@@ -18,10 +18,7 @@ class Repos extends Component {
           * change state list of repositories
           * and list the result filtered
           */
-         const { userResult } = this.props;
-
-         console.log('use', userResult);
-         
+         const { userResult } = this.props;         
 
         return(
             <ul>
