@@ -99,7 +99,7 @@ export default class App extends Component {
 						<Route path="/" exact render={() => <Repos userResult={item} />} />
 					</Switch>
 
-					<small className="text-foot">Built with ❤ and React and deployed with Netlify, by <a href="https://github.com/pedrohenrickcs" target="_blank">@PedroHenricks</a>  - © 2019"</small>
+					<small className="text-foot">Built with ❤ and React and deployed with Netlify, by <a href="https://github.com/pedrohenrickcs" target="_blank">@PedroHenricks</a>  - © 2019</small>
 				</div>
 				
 			</Router>
